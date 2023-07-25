@@ -110,5 +110,5 @@ function stopWatch(){
   stopwatch.style = "display:flex";
   counter.style = "display:none";
   timerButton.style = "background-color: #181818;border-radius: 0px 0px 0px 10px;"
-  stopwatchButton.style = " background-color: #404040;border-radius: 0px 10px 0px 0px;"
+  stopwatchButton.style = " background-color: #404040;border-radius: 10px 10px 0px 0px;"
 }
