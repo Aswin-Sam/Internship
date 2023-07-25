@@ -89,3 +89,26 @@ function increaseHours() {
     hr.innerHTML = hrs;
   }
 }
+
+
+//Timer
+
+
+let timerButton = document.querySelector("#tr");
+let stopwatchButton = document.querySelector("#sw");
+let counter = document.querySelector("#timer");
+let stopwatch = document.querySelector("#stopwatch");
+
+function timer(){
+  stopwatch.style = "display:none";
+  counter.style = "display:flex";
+  timerButton.style = "background-color: #404040;border-radius: 0px 10px 0px 0px;"
+  stopwatchButton.style = " background-color: #181818;border-radius: 10px 0px 10px 0px;"
+}
+
+function stopWatch(){
+  stopwatch.style = "display:flex";
+  counter.style = "display:none";
+  timerButton.style = "background-color: #181818;border-radius: 0px 0px 0px 10px;"
+  stopwatchButton.style = " background-color: #404040;border-radius: 0px 10px 0px 0px;"
+}
