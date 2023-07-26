@@ -94,3 +94,6 @@
 #timer {
   display: none;
 }
+#timer .block2{
+  width: auto;
+}

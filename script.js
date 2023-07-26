@@ -3,19 +3,27 @@ let min = document.querySelector("#min");
 let sec = document.querySelector("#sec");
 // let msec = document.querySelector("#msec");
 // let msecs = 0
-let secs = 0,
+let secs = 1,
   mins = 0,
   hrs = 0;
 // let msecId;
 let secId;
+let isStart = false;
+let is0thTime = false;
 function start() {
-  isStop = false;
-  //   msecId = setInterval(increaseMilliSeconds, 1);
-  secId = setInterval(increaseSeconds, 1000);
+  if (!isStart) {
+    isStart = true;
+    if (!is0thTime) {
+      is0thTime = true;
+      sec.innerHTML = "01";
+    }
+    //   msecId = setInterval(increaseMilliSeconds, 1);
+    secId = setInterval(increaseSeconds, 1000);
+  }
 }
 
 function stop() {
-  isStop = true;
+  isStart = false;
   //   clearInterval(msecId);
   clearInterval(secId);
 }
@@ -23,7 +31,8 @@ function stop() {
 function reset() {
   //   clearInterval(msecId);
   clearInterval(secId);
-  isStop = false;
+  isStart = false;
+  is0thTime = false;
   //   msecs = 0;
   //   msec.innerHTML = "000";
   secs = 0;
@@ -104,6 +113,8 @@ function timer() {
     "background-color: #404040;border-radius: 0px 10px 0px 0px;";
   stopwatchButton.style =
     " background-color: #181818;border-radius: 10px 0px 10px 0px;";
+    
+  reset();
 }
 
 function stopWatch() {
@@ -113,6 +124,8 @@ function stopWatch() {
     "background-color: #181818;border-radius: 0px 0px 0px 10px;";
   stopwatchButton.style =
     " background-color: #404040;border-radius: 10px 10px 0px 0px;";
+
+  tReset();
 }
 
 //Timer Function
@@ -171,6 +184,7 @@ function tStart() {
 
     tsecId = setInterval(decreaseSeconds, 1000);
   }
+  reset();
 }
 
 function tStop() {
