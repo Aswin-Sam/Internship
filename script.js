@@ -1,9 +1,9 @@
 let hr = document.querySelector("#hr");
 let min = document.querySelector("#min");
 let sec = document.querySelector("#sec");
-let msec = document.querySelector("#msec");
-let msecs = 0,
-  secs = 0,
+// let msec = document.querySelector("#msec");
+// let msecs = 0
+let secs = 0,
   mins = 0,
   hrs = 0;
 // let msecId;
@@ -90,25 +90,149 @@ function increaseHours() {
   }
 }
 
-
 //Timer
-
 
 let timerButton = document.querySelector("#tr");
 let stopwatchButton = document.querySelector("#sw");
 let counter = document.querySelector("#timer");
 let stopwatch = document.querySelector("#stopwatch");
 
-function timer(){
+function timer() {
   stopwatch.style = "display:none";
   counter.style = "display:flex";
-  timerButton.style = "background-color: #404040;border-radius: 0px 10px 0px 0px;"
-  stopwatchButton.style = " background-color: #181818;border-radius: 10px 0px 10px 0px;"
+  timerButton.style =
+    "background-color: #404040;border-radius: 0px 10px 0px 0px;";
+  stopwatchButton.style =
+    " background-color: #181818;border-radius: 10px 0px 10px 0px;";
 }
 
-function stopWatch(){
+function stopWatch() {
   stopwatch.style = "display:flex";
   counter.style = "display:none";
-  timerButton.style = "background-color: #181818;border-radius: 0px 0px 0px 10px;"
-  stopwatchButton.style = " background-color: #404040;border-radius: 10px 10px 0px 0px;"
+  timerButton.style =
+    "background-color: #181818;border-radius: 0px 0px 0px 10px;";
+  stopwatchButton.style =
+    " background-color: #404040;border-radius: 10px 10px 0px 0px;";
+}
+
+//Timer Function
+
+let thr = document.querySelector("#thr");
+let tmin = document.querySelector("#tmin");
+let tsec = document.querySelector("#tsec");
+let thrs = 0,
+  tmins = 0,
+  tsecs = 0;
+let tsecId = 0;
+let istStart = false;
+
+function timeCorrector(h, m, s) {
+  if (s > 59) {
+    m += parseInt(s / 60);
+    s = s % 60;
+  }
+
+  if (m > 59) {
+    h += parseInt(m / 60);
+    m = m % 60;
+  }
+
+  thrs = h;
+  tmins = m;
+  tsecs = s;
+  if ((h + "").length == 1) {
+    thr.innerHTML = "0" + h;
+  } else {
+    thr.innerHTML = h;
+  }
+
+  if ((m + "").length == 1) {
+    tmin.innerHTML = "0" + m;
+  } else {
+    tmin.innerHTML = m;
+  }
+
+  if ((s + "").length == 1) {
+    tsec.innerHTML = "0" + s;
+  } else {
+    tsec.innerHTML = s;
+  }
+  // console.log(h + ":" + m + ":" + s);
+}
+
+function tStart() {
+  if (!istStart) {
+    istStart = true;
+    thrs = parseInt(thr.innerHTML);
+    tmins = parseInt(tmin.innerHTML);
+    tsecs = parseInt(tsec.innerHTML);
+
+    timeCorrector(thrs, tmins, tsecs);
+
+    tsecId = setInterval(decreaseSeconds, 1000);
+  }
+}
+
+function tStop() {
+  istStart = false;
+  clearInterval(tsecId);
+}
+
+function tReset() {
+  istStart = false;
+  clearInterval(tsecId);
+  tsec.innerHTML = "00";
+  thr.innerHTML = "00";
+  tmin.innerHTML = "00";
+}
+
+function decreaseSeconds() {
+  tsecs--;
+  if (tsecs === 0 && tmins > 0) {
+    decreaseMinutes();
+  }
+  if (tsecs === 0 && tmins === 0 && thrs === 0) {
+    clearInterval(tsecId);
+    tsec.innerHTML = "00";
+    thr.innerHTML = "00";
+    tmin.innerHTML = "00";
+  } else {
+    if (tsecs <= 0) {
+      decreaseMinutes();
+    } else {
+      if ((tsecs + "").length == 1) {
+        tsec.innerHTML = "0" + tsecs;
+      } else {
+        tsec.innerHTML = tsecs;
+      }
+    }
+  }
+}
+
+function decreaseMinutes() {
+  tmins--;
+  tsecs = 59;
+  if (tmins <= 0 && thrs > 0) {
+    decreaseHours();
+  } else {
+    if ((tmins + "").length == 1) {
+      tmin.innerHTML = "0" + tmins;
+    } else {
+      tmin.innerHTML = tmins;
+    }
+    tsec.innerHTML = 59;
+  }
+}
+
+function decreaseHours() {
+  thrs--;
+  tmins = 59;
+  tsecs = 59;
+  if ((thrs + "").length == 1) {
+    thr.innerHTML = "0" + thrs;
+  } else {
+    thr.innerHTML = thrs;
+  }
+  tmin.innerHTML = 59;
+  tsec.innerHTML = 59;
 }
