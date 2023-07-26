@@ -176,6 +176,18 @@ function timeCorrector(h, m, s) {
 function tStart() {
   if (!istStart) {
     istStart = true;
+    if((thr.innerHTML).length === 0){
+      istStart = false;
+      thr.innerHTML = "00";
+    }
+    if((tmin.innerHTML).length === 0){
+      istStart = false;
+      tmin.innerHTML = "00";
+    }
+    if((tsec.innerHTML).length === 0){
+      istStart = false;
+      tsec.innerHTML = "00";
+    }
     thrs = parseInt(thr.innerHTML);
     tmins = parseInt(tmin.innerHTML);
     tsecs = parseInt(tsec.innerHTML);
@@ -205,7 +217,7 @@ function decreaseSeconds() {
   if (tsecs === 0 && tmins > 0) {
     decreaseMinutes();
   }
-  if (tsecs === 0 && tmins === 0 && thrs === 0) {
+  if (tsecs <= 0 && tmins <= 0 && thrs <= 0) {
     clearInterval(tsecId);
     tsec.innerHTML = "00";
     thr.innerHTML = "00";
