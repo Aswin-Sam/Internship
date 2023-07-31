@@ -105,6 +105,7 @@ let timerButton = document.querySelector("#tr");
 let stopwatchButton = document.querySelector("#sw");
 let counter = document.querySelector("#timer");
 let stopwatch = document.querySelector("#stopwatch");
+let sound = new Audio("ring.wav");
 
 function timer() {
   stopwatch.style = "display:none";
@@ -222,6 +223,7 @@ function decreaseSeconds() {
     tsec.innerHTML = "00";
     thr.innerHTML = "00";
     tmin.innerHTML = "00";
+    sound.play();
   } else {
     if (tsecs <= 0) {
       decreaseMinutes();
